@@ -14,6 +14,8 @@ model Companies {
   Users     Users[]
   createdAt DateTime? @default(now())
   updatedAt DateTime? @updatedAt
+
+  @@map("companies")
 }
 
 model Users {
@@ -25,6 +27,8 @@ model Users {
   company   Companies @relation(fields: [companyId], references: [id])
   createdAt DateTime? @default(now())
   updatedAt DateTime? @updatedAt
+
+  @@map("users")
 }
 
 model Units {
@@ -35,6 +39,8 @@ model Units {
   Assets    Assets[]
   createdAt DateTime? @default(now())
   updatedAt DateTime? @updatedAt
+
+  @@map("units")
 }
 
 enum Status {
@@ -56,4 +62,6 @@ model Assets {
   unit        Units     @relation(fields: [unitId], references: [id])
   createdAt   DateTime? @default(now())
   updatedAt   DateTime? @updatedAt
+
+  @@map("assets")
 }
