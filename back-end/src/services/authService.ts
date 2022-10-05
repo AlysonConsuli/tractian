@@ -25,6 +25,8 @@ const signin = async (userData: UserInsertData) => {
 const getUserOrFail = async (name: string) => {
   const user = await authRepository.findUserByName(name);
   if (!user) throw notFoundError("User not found!");
+  if (!user.isAdmin)
+    throw unauthorizedError("Only accessed by maintenance managers!");
   return user;
 };
 
