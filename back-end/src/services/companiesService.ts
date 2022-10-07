@@ -1,6 +1,7 @@
 import { CompanyInsertData } from "../interfaces/createData.js";
 import {
   conflictError,
+  notFoundError,
   unprocessableEntityError,
 } from "../middlewares/errorHandlingMiddleware.js";
 import { companiesRepository } from "../repositories/companiesRepository.js";
@@ -18,8 +19,10 @@ const registerCompany = async (company: CompanyInsertData) => {
 
 const updateCompany = async (company: CompanyInsertData, companyId: string) => {
   const { name } = company;
-  await __validateIdOrFail(companyId);
-  await __validateNameOrFail(name);
+  const selectedCompany = await __validateIdOrFail(companyId);
+  if (name !== selectedCompany.name) {
+    await __validateNameOrFail(name);
+  }
   await companiesRepository.update(companyId, company);
 };
 
@@ -32,7 +35,8 @@ const __validateIdOrFail = async (id: string) => {
   if (id.length !== 24)
     throw unprocessableEntityError("Company id must be exactly 24 char!");
   const company = await companiesRepository.findById(id);
-  if (!company) throw conflictError("Company not found!");
+  if (!company) throw notFoundError("Company not found!");
+  return company;
 };
 
 export const companiesService = {
