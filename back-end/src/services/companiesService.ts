@@ -20,9 +20,11 @@ const registerCompany = async (company: CompanyInsertData) => {
 const updateCompany = async (company: CompanyInsertData, companyId: string) => {
   const { name } = company;
   const selectedCompany = await __validateIdOrFail(companyId);
+
   if (name !== selectedCompany.name) {
     await __validateNameOrFail(name);
   }
+
   await companiesRepository.update(companyId, company);
 };
 

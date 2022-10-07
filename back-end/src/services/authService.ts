@@ -7,10 +7,10 @@ import {
   unauthorizedError,
 } from "../middlewares/errorHandlingMiddleware.js";
 import { authRepository } from "../repositories/authRepository.js";
-import { UserInsertData } from "../interfaces/createData.js";
+import { AuthInsertData } from "../interfaces/createData.js";
 import { Users } from "@prisma/client";
 
-const signin = async (userData: UserInsertData) => {
+const signin = async (userData: AuthInsertData) => {
   const { name, password } = userData;
 
   const user = await getUserOrFail(name);
