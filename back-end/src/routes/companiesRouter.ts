@@ -9,6 +9,11 @@ const companyRouter = Router();
 companyRouter
   .all("/*", validateToken)
   .get("/", companiesControler.getCompanies)
-  .post("/", validateSchema(companySchema), companiesControler.registerCompany);
+  .post("/", validateSchema(companySchema), companiesControler.registerCompany)
+  .put(
+    "/:companyId",
+    validateSchema(companySchema),
+    companiesControler.updateCompany,
+  );
 
 export default companyRouter;

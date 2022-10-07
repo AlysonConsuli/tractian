@@ -13,7 +13,15 @@ const registerCompany = async (req: Request, res: Response) => {
   res.sendStatus(201);
 };
 
+const updateCompany = async (req: Request, res: Response) => {
+  const companyId: string = req.params.companyId;
+  const company: CompanyInsertData = req.body;
+  await companiesService.updateCompany(company, companyId);
+  res.sendStatus(201);
+};
+
 export const companiesControler = {
   getCompanies,
   registerCompany,
+  updateCompany,
 };
