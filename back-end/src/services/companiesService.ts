@@ -26,6 +26,11 @@ const updateCompany = async (company: CompanyInsertData, companyId: string) => {
   await companiesRepository.update(companyId, company);
 };
 
+const deleteCompany = async (companyId: string) => {
+  await __validateIdOrFail(companyId);
+  await companiesRepository.deleteById(companyId);
+};
+
 const __validateNameOrFail = async (name: string) => {
   const company = await companiesRepository.findByName(name);
   if (company) throw conflictError("Company name already exists!");
@@ -43,4 +48,5 @@ export const companiesService = {
   getCompanies,
   registerCompany,
   updateCompany,
+  deleteCompany,
 };

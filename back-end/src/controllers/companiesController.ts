@@ -17,11 +17,18 @@ const updateCompany = async (req: Request, res: Response) => {
   const companyId: string = req.params.companyId;
   const company: CompanyInsertData = req.body;
   await companiesService.updateCompany(company, companyId);
-  res.sendStatus(201);
+  res.sendStatus(200);
+};
+
+const deleteCompany = async (req: Request, res: Response) => {
+  const companyId: string = req.params.companyId;
+  await companiesService.deleteCompany(companyId);
+  res.sendStatus(204);
 };
 
 export const companiesControler = {
   getCompanies,
   registerCompany,
   updateCompany,
+  deleteCompany,
 };

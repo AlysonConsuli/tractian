@@ -36,10 +36,19 @@ const update = async (id: string, data: CompanyInsertData) => {
   });
 };
 
+const deleteById = async (id: string) => {
+  return await prisma.companies.delete({
+    where: {
+      id,
+    },
+  });
+};
+
 export const companiesRepository = {
   findMany,
   findByName,
   findById,
   insert,
   update,
+  deleteById,
 };

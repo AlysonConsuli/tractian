@@ -14,6 +14,7 @@ companyRouter
     "/:companyId",
     validateSchema(companySchema),
     companiesControler.updateCompany,
-  );
+  )
+  .delete("/:companyId", companiesControler.deleteCompany);
 
 export default companyRouter;
