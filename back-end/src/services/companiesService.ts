@@ -6,14 +6,14 @@ import {
 import { companiesRepository } from "../repositories/companiesRepository.js";
 
 const getCompanies = async () => {
-  const companies = await companiesRepository.getCompanies();
+  const companies = await companiesRepository.findMany();
   return companies;
 };
 
 const registerCompany = async (company: CompanyInsertData) => {
   const { name } = company;
   await __validateNameOrFail(name);
-  await companiesRepository.insert(name);
+  await companiesRepository.insert(company);
 };
 
 const updateCompany = async (company: CompanyInsertData, companyId: string) => {
@@ -24,7 +24,7 @@ const updateCompany = async (company: CompanyInsertData, companyId: string) => {
 };
 
 const __validateNameOrFail = async (name: string) => {
-  const company = await companiesRepository.getCompany(name);
+  const company = await companiesRepository.findByName(name);
   if (company) throw conflictError("Company name already exists!");
 };
 
