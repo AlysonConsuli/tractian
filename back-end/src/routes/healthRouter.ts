@@ -3,5 +3,5 @@ import appHealth from "../controllers/healthController.js";
 
 const healthRouter = Router();
 
-healthRouter.get("/health", appHealth);
+healthRouter.get("/", appHealth);
 export default healthRouter;

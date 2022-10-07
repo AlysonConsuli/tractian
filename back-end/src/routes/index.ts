@@ -5,8 +5,8 @@ import companyRouter from "./companiesRouter.js";
 import healthRouter from "./healthRouter.js";
 
 const router = Router();
-router.use(healthRouter);
-router.use(authRouter);
+router.use("/health", healthRouter);
+router.use("/auth", authRouter);
 router.use("/company", companyRouter);
 
 export default router;
