@@ -1,20 +1,20 @@
 import { Companies } from "@prisma/client";
 import { CompanyInsertData } from "../interfaces/createData.js";
-import { companiesRepository } from "../repositories/companiesRepository.js";
+import { appRepository } from "../repositories/appRepository.js";
 import {
   __validateIdOrFail,
   __validateNameOrFail,
 } from "../utils/validateData.js";
 
 const getCompanies = async () => {
-  const companies = await companiesRepository.findMany();
+  const companies = await appRepository.findMany<Companies>("companies");
   return companies;
 };
 
 const registerCompany = async (company: CompanyInsertData) => {
   const { name } = company;
   await __validateNameOrFail<Companies>(name, "companies", "Company");
-  await companiesRepository.insert(company);
+  await appRepository.insert<CompanyInsertData>(company, "companies");
 };
 
 const updateCompany = async (company: CompanyInsertData, companyId: string) => {
@@ -29,12 +29,16 @@ const updateCompany = async (company: CompanyInsertData, companyId: string) => {
     await __validateNameOrFail<Companies>(name, "companies", "Company");
   }
 
-  await companiesRepository.update(companyId, company);
+  await appRepository.update<CompanyInsertData>(
+    companyId,
+    company,
+    "companies",
+  );
 };
 
 const deleteCompany = async (companyId: string) => {
   await __validateIdOrFail<Companies>(companyId, "companies", "Company");
-  await companiesRepository.deleteById(companyId);
+  await appRepository.deleteById(companyId, "companies");
 };
 
 export const companiesService = {

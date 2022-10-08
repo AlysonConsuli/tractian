@@ -6,9 +6,9 @@ import {
   notFoundError,
   unauthorizedError,
 } from "../middlewares/errorHandlingMiddleware.js";
-import { authRepository } from "../repositories/authRepository.js";
 import { AuthInsertData } from "../interfaces/createData.js";
 import { Users } from "@prisma/client";
+import { appRepository } from "../repositories/appRepository.js";
 
 const signin = async (userData: AuthInsertData) => {
   const { name, password } = userData;
@@ -23,7 +23,7 @@ const signin = async (userData: AuthInsertData) => {
 };
 
 const __getUserOrFail = async (name: string) => {
-  const user = await authRepository.findUserByName(name);
+  const user = await appRepository.findByName<Users>(name, "users");
   if (!user) throw notFoundError("User not found!");
   if (!user.isAdmin)
     throw unauthorizedError("Only accessed by maintenance managers!");
