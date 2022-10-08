@@ -44,9 +44,9 @@ model Units {
 }
 
 enum Status {
-  RUNNING  @map("Running")
-  ALERTING @map("Alerting")
-  STOPPED  @map("Stopped")
+  Running
+  Alerting
+  Stopped
 }
 
 model Assets {
