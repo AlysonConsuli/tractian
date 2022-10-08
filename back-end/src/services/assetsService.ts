@@ -1,13 +1,14 @@
 import { Units, Assets } from "@prisma/client";
 import { AssetInsertData } from "../interfaces/createData.js";
 import { appRepository } from "../repositories/appRepository.js";
+import { assetsRepository } from "../repositories/assetsRepository.js";
 import {
   __validateIdOrFail,
   __validateNameOrFail,
 } from "../utils/validateData.js";
 
 const getAssets = async () => {
-  const assets = await appRepository.findMany<Assets>("assets");
+  const assets = await assetsRepository.findMany();
   return assets;
 };
 
