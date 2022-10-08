@@ -12,5 +12,5 @@ export const assetSchema = Joi.object<AssetInsertData>({
     .required()
     .valid(...Object.values(Status)),
   healthLevel: Joi.number().min(0).max(1).required(),
-  unitId: Joi.string().length(24).required(),
+  unitId: Joi.string().hex().length(24).required(),
 });

@@ -20,9 +20,10 @@ export async function __validateIdOrFail<T>(
   table: Table,
   tableTitle: string,
 ) {
-  if (id.length !== 24) {
+  const regex = /^[0-9A-Fa-f]{24}$/;
+  if (!regex.test(id)) {
     throw unprocessableEntityError(
-      `${tableTitle} id length must be 24 characters long`,
+      `${tableTitle} id must be a 24-character hex string!`,
     );
   }
   const data: T = await appRepository.findById(id, table);
