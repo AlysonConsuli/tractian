@@ -1,13 +1,14 @@
 import { Companies, Units } from "@prisma/client";
 import { UnitInsertData } from "../interfaces/createData.js";
 import { appRepository } from "../repositories/appRepository.js";
+import { unitsRepository } from "../repositories/unitsRepository.js";
 import {
   __validateIdOrFail,
   __validateNameOrFail,
 } from "../utils/validateData.js";
 
 const getUnits = async () => {
-  const units = await appRepository.findMany<Units>("units");
+  const units = await unitsRepository.findMany();
   return units;
 };
 
