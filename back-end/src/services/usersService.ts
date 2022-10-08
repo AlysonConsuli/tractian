@@ -1,12 +1,11 @@
+import { Companies, Users } from "@prisma/client";
 import bcrypt from "bcrypt";
 import { UserInsertData } from "../interfaces/createData.js";
-import {
-  conflictError,
-  notFoundError,
-  unprocessableEntityError,
-} from "../middlewares/errorHandlingMiddleware.js";
-import { companiesRepository } from "../repositories/companiesRepository.js";
 import { usersRepository } from "../repositories/usersRepository.js";
+import {
+  __validateIdOrFail,
+  __validateNameOrFail,
+} from "../utils/validateData.js";
 
 const getUsers = async () => {
   const users = await usersRepository.findMany();
@@ -15,8 +14,8 @@ const getUsers = async () => {
 
 const registerUser = async (user: UserInsertData) => {
   const { name, companyId } = user;
-  await __validateNameOrFail(name);
-  await __validateCompanyOrFail(companyId);
+  await __validateNameOrFail<Users>(name, "users", "User");
+  await __validateIdOrFail<Companies>(companyId, "companies", "Company");
 
   const password = __encryptPassword(user.password);
   await usersRepository.insert({ ...user, password });
@@ -24,38 +23,20 @@ const registerUser = async (user: UserInsertData) => {
 
 const updateUser = async (user: UserInsertData, userId: string) => {
   const { name, companyId } = user;
-  const selectedUser = await __validateIdOrFail(userId);
+  const selectedUser = await __validateIdOrFail<Users>(userId, "users", "User");
 
   if (name !== selectedUser.name) {
-    await __validateNameOrFail(name);
+    await __validateNameOrFail<Users>(name, "users", "User");
   }
-  await __validateCompanyOrFail(companyId);
+  await __validateIdOrFail<Companies>(companyId, "companies", "Company");
 
   const password = __encryptPassword(user.password);
   await usersRepository.update(userId, { ...user, password });
 };
 
 const deleteUser = async (userId: string) => {
-  await __validateIdOrFail(userId);
+  await __validateIdOrFail<Users>(userId, "users", "User");
   await usersRepository.deleteById(userId);
-};
-
-const __validateNameOrFail = async (name: string) => {
-  const user = await usersRepository.findByName(name);
-  if (user) throw conflictError("User name already exists!");
-};
-
-const __validateIdOrFail = async (id: string) => {
-  if (id.length !== 24)
-    throw unprocessableEntityError("User id must be exactly 24 char!");
-  const user = await usersRepository.findById(id);
-  if (!user) throw notFoundError("User not found!");
-  return user;
-};
-
-const __validateCompanyOrFail = async (companyId: string) => {
-  const company = await companiesRepository.findById(companyId);
-  if (!company) throw notFoundError("Company not found!");
 };
 
 const __encryptPassword = (password: string) => {

@@ -9,3 +9,4 @@ export type CompanyInsertData = Omit<
   "id" | "createdAt" | "updatedAt"
 >;
 export type UserInsertData = Omit<Users, "id" | "createdAt" | "updatedAt">;
+export type Table = "companies" | "users" | "units" | "assets";

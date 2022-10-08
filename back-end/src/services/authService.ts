@@ -13,16 +13,16 @@ import { Users } from "@prisma/client";
 const signin = async (userData: AuthInsertData) => {
   const { name, password } = userData;
 
-  const user = await getUserOrFail(name);
+  const user = await __getUserOrFail(name);
 
-  await validatePasswordOrFail(password, user.password);
+  await __validatePasswordOrFail(password, user.password);
 
-  const token = await createSession(user);
+  const token = await __createSession(user);
 
   return { name, token };
 };
 
-const getUserOrFail = async (name: string) => {
+const __getUserOrFail = async (name: string) => {
   const user = await authRepository.findUserByName(name);
   if (!user) throw notFoundError("User not found!");
   if (!user.isAdmin)
@@ -30,7 +30,7 @@ const getUserOrFail = async (name: string) => {
   return user;
 };
 
-const validatePasswordOrFail = async (
+const __validatePasswordOrFail = async (
   password: string,
   userPassword: string,
 ) => {
@@ -38,7 +38,7 @@ const validatePasswordOrFail = async (
   if (!isPasswordValid) throw unauthorizedError("Incorrect password!");
 };
 
-const createSession = async (user: Users) => {
+const __createSession = async (user: Users) => {
   const secretKey = process.env.JWT_SECRET_KEY;
   const token: string = jwt.sign(user, secretKey);
   return token;
