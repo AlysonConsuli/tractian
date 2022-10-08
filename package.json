@@ -1,0 +1,12 @@
+{
+  "name": "tractian",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+  },
+  "keywords": [],
+  "author": "Alyson Consuli",
+  "license": "ISC"
+}
