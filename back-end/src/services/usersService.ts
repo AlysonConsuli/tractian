@@ -3,13 +3,14 @@ import bcrypt from "bcrypt";
 
 import { UserInsertData } from "../interfaces/createData.js";
 import { appRepository } from "../repositories/appRepository.js";
+import { usersRepository } from "../repositories/usersRepository.js";
 import {
   __validateIdOrFail,
   __validateNameOrFail,
 } from "../utils/validateData.js";
 
 const getUsers = async () => {
-  const users = await appRepository.findMany<Users>("users");
+  const users = await usersRepository.findMany();
   return users;
 };
 
