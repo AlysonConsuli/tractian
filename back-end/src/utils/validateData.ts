@@ -13,7 +13,6 @@ export async function __validateNameOrFail<T>(
 ) {
   const data: T = await appRepository.findByName(name, table);
   if (data) throw conflictError(`${tableTitle} name already exists!`);
-  return data;
 }
 
 export async function __validateIdOrFail<T>(

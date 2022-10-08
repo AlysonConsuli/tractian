@@ -1,14 +1,15 @@
 import { Companies, Users } from "@prisma/client";
 import bcrypt from "bcrypt";
+
 import { UserInsertData } from "../interfaces/createData.js";
-import { usersRepository } from "../repositories/usersRepository.js";
+import { appRepository } from "../repositories/appRepository.js";
 import {
   __validateIdOrFail,
   __validateNameOrFail,
 } from "../utils/validateData.js";
 
 const getUsers = async () => {
-  const users = await usersRepository.findMany();
+  const users = await appRepository.findMany<Users>("users");
   return users;
 };
 
@@ -18,7 +19,7 @@ const registerUser = async (user: UserInsertData) => {
   await __validateIdOrFail<Companies>(companyId, "companies", "Company");
 
   const password = __encryptPassword(user.password);
-  await usersRepository.insert({ ...user, password });
+  await appRepository.insert<UserInsertData>({ ...user, password }, "users");
 };
 
 const updateUser = async (user: UserInsertData, userId: string) => {
@@ -31,12 +32,16 @@ const updateUser = async (user: UserInsertData, userId: string) => {
   await __validateIdOrFail<Companies>(companyId, "companies", "Company");
 
   const password = __encryptPassword(user.password);
-  await usersRepository.update(userId, { ...user, password });
+  await appRepository.update<UserInsertData>(
+    userId,
+    { ...user, password },
+    "users",
+  );
 };
 
 const deleteUser = async (userId: string) => {
   await __validateIdOrFail<Users>(userId, "users", "User");
-  await usersRepository.deleteById(userId);
+  await appRepository.deleteById(userId, "users");
 };
 
 const __encryptPassword = (password: string) => {
