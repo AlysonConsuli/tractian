@@ -43,7 +43,7 @@ async function main() {
         model: "Modelo da máquina 1",
         owner: "Proprietário da máquina 1",
         status: "Running",
-        healthLevel: 1,
+        healthLevel: 100,
         unitId: unit1.id,
       },
       {
@@ -53,7 +53,7 @@ async function main() {
         model: "Modelo da máquina 2",
         owner: "Proprietário da máquina 2",
         status: "Alerting",
-        healthLevel: 0.6,
+        healthLevel: 60,
         unitId: unit2.id,
       },
       {
@@ -73,7 +73,7 @@ async function main() {
         model: "Modelo da máquina 4",
         owner: "Proprietário da máquina 4",
         status: "Running",
-        healthLevel: 0.8,
+        healthLevel: 80,
         unitId: unit1.id,
       },
       {
@@ -83,7 +83,7 @@ async function main() {
         model: "Modelo da máquina 5",
         owner: "Proprietário da máquina 5",
         status: "Alerting",
-        healthLevel: 0.5,
+        healthLevel: 50,
         unitId: unit2.id,
       },
       {
@@ -93,7 +93,7 @@ async function main() {
         model: "Modelo da máquina 6",
         owner: "Proprietário da máquina 6",
         status: "Stopped",
-        healthLevel: 0.1,
+        healthLevel: 10,
         unitId: unit1.id,
       },
       {
@@ -103,7 +103,7 @@ async function main() {
         model: "Modelo da máquina 7",
         owner: "Proprietário da máquina 7",
         status: "Running",
-        healthLevel: 0.9,
+        healthLevel: 90,
         unitId: unit1.id,
       },
       {
@@ -113,7 +113,7 @@ async function main() {
         model: "Modelo da máquina 8",
         owner: "Proprietário da máquina 8",
         status: "Alerting",
-        healthLevel: 0.5,
+        healthLevel: 50,
         unitId: unit2.id,
       },
       {
@@ -133,7 +133,7 @@ async function main() {
         model: "Modelo da máquina 10",
         owner: "Proprietário da máquina 10",
         status: "Running",
-        healthLevel: 1,
+        healthLevel: 100,
         unitId: unit2.id,
       },
     ],
