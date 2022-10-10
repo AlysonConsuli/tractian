@@ -4,7 +4,7 @@ import { assetsService } from "../services/assetsService.js";
 
 const getAssets = async (req: Request, res: Response) => {
   const assets = await assetsService.getAssets();
-  res.send({ assets });
+  res.send(assets);
 };
 
 const registerAsset = async (req: Request, res: Response) => {

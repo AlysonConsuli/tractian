@@ -4,7 +4,7 @@ import { companiesService } from "../services/companiesService.js";
 
 const getCompanies = async (req: Request, res: Response) => {
   const companies = await companiesService.getCompanies();
-  res.send({ companies });
+  res.send(companies);
 };
 
 const registerCompany = async (req: Request, res: Response) => {

@@ -4,7 +4,7 @@ import { unitsService } from "../services/unitsService.js";
 
 const getUnits = async (req: Request, res: Response) => {
   const units = await unitsService.getUnits();
-  res.send({ units });
+  res.send(units);
 };
 
 const registerUnit = async (req: Request, res: Response) => {

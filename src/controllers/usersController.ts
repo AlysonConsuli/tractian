@@ -4,7 +4,7 @@ import { usersService } from "../services/usersService.js";
 
 const getUsers = async (req: Request, res: Response) => {
   const users = await usersService.getUsers();
-  res.send({ users });
+  res.send(users);
 };
 
 const registerUser = async (req: Request, res: Response) => {
