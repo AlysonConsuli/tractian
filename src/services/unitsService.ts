@@ -1,6 +1,8 @@
 import { Companies, Units } from "@prisma/client";
 import { UnitInsertData } from "../interfaces/createData.js";
+import { conflictError } from "../middlewares/errorHandlingMiddleware.js";
 import { appRepository } from "../repositories/appRepository.js";
+import { assetsRepository } from "../repositories/assetsRepository.js";
 import { unitsRepository } from "../repositories/unitsRepository.js";
 import {
   __validateIdOrFail,
@@ -35,8 +37,15 @@ const updateUnit = async (unit: UnitInsertData, unitId: string) => {
 
 const deleteUnit = async (unitId: string) => {
   await __validateIdOrFail<Units>(unitId, "units", "Unit");
+  await __validateUnitAssociation(unitId);
+
   await appRepository.deleteById(unitId, "units");
 };
+
+async function __validateUnitAssociation(unitId: string) {
+  const asset = await assetsRepository.findByUnitId(unitId);
+  if (asset) throw conflictError("There are assets associated with this unit!");
+}
 
 export const unitsService = {
   getUnits,

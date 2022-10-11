@@ -20,6 +20,15 @@ async function findMany() {
   });
 }
 
+async function findByUnitId(unitId: string) {
+  return await prisma.assets.findFirst({
+    where: {
+      unitId,
+    },
+  });
+}
+
 export const assetsRepository = {
   findMany,
+  findByUnitId,
 };
