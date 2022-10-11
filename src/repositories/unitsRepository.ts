@@ -14,6 +14,15 @@ async function findMany() {
   });
 }
 
+async function findByCompanyId(companyId: string) {
+  return await prisma.units.findFirst({
+    where: {
+      companyId,
+    },
+  });
+}
+
 export const unitsRepository = {
   findMany,
+  findByCompanyId,
 };
