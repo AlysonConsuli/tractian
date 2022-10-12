@@ -51,7 +51,7 @@ async function main() {
         name: "Lathe Machine",
         image:
           "https://s.alicdn.com/@sc04/kf/Hbac2857a42f8455590c8fb06f1653c2fy.jpg_960x960.jpg",
-        description: "Chinese Metal Mill Lathe",
+        description: "Manual Chinese Metal Mill Lathe",
         model: "G1340",
         owner: "Borui CNC Ltd.",
         status: "Alerting",
@@ -60,7 +60,8 @@ async function main() {
       },
       {
         name: "Milling Machine",
-        image: "https://svgsilh.com/svg/312334.svg",
+        image:
+          "https://s.alicdn.com/@sc04/kf/H06262d98c3f0497db6c27f26e4ee4242M.jpg_960x960.jpg",
         description: "Manual Metal Milling Machine",
         model: "X6336cw",
         owner: "Borui CNC Ltd.",
@@ -72,7 +73,7 @@ async function main() {
         name: "Gear Cutting",
         image:
           "https://s.alicdn.com/@sc04/kf/H80d7fdd1dde5498bb30ccf9c4f8bc82ah.jpg_960x960.jpg",
-        description: "Hydraulic Gear Cutting",
+        description: "Hydraulic Gear Cutting Semi-automatic",
         model: "Y3180h",
         owner: "Borui CNC Ltd.",
         status: "Running",
@@ -92,7 +93,8 @@ async function main() {
       },
       {
         name: "Shearing Machine",
-        image: "https://svgsilh.com/svg/312334.svg",
+        image:
+          "https://abmaq.com.br/wp/wp-content/uploads/2021/10/metaleira.jpg",
         description: "Shearing machine Semi-automatic",
         model: "Q35br-250",
         owner: "Borui CNC Ltd.",
@@ -126,7 +128,7 @@ async function main() {
         name: "Milling Machine",
         image:
           "https://s.alicdn.com/@sc04/kf/HTB1xDeWbhtnkeRjSZSgq6xAuXXal.jpg_960x960.jpg",
-        description: "Milling Machine Horizontal",
+        description: "Manual Milling Machine Horizontal",
         model: "Xk7124",
         owner: "Borui CNC Ltd.",
         status: "Stopped",
