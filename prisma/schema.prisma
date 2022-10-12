@@ -52,7 +52,7 @@ enum Status {
 model Assets {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
   image       String
-  name        String    @unique
+  name        String
   description String
   model       String
   owner       String

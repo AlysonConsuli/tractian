@@ -13,25 +13,17 @@ const getAssets = async () => {
 };
 
 const registerAsset = async (asset: AssetInsertData) => {
-  const { name, unitId } = asset;
+  const { unitId } = asset;
 
-  await __validateNameOrFail<Assets>(name, "assets", "Asset");
   await __validateIdOrFail<Units>(unitId, "units", "Unit");
 
   await appRepository.insert<AssetInsertData>(asset, "assets");
 };
 
 const updateAsset = async (asset: AssetInsertData, assetId: string) => {
-  const { name, unitId } = asset;
-  const selectedAsset = await __validateIdOrFail<Assets>(
-    assetId,
-    "assets",
-    "Asset",
-  );
+  const { unitId } = asset;
+  await __validateIdOrFail<Assets>(assetId, "assets", "Asset");
 
-  if (name !== selectedAsset.name) {
-    await __validateNameOrFail<Assets>(name, "assets", "Asset");
-  }
   await __validateIdOrFail<Units>(unitId, "units", "Unit");
 
   await appRepository.update<AssetInsertData>(assetId, asset, "assets");
